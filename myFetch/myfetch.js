@@ -14,11 +14,26 @@ const myFetch = async (options) => {
         }
     }
 
-    if (myFetch.baseUrl && !url) {
-        url = myFetch.baseUrl
+    const isSpecialCase =
+        url.startsWith('/') ||
+        url.startsWith('?') ||
+        url.startsWith(':') ||
+        url.lastIndexOf('/') === url.length - 1 ||
+        url.lastIndexOf('?') === url.length - 1 ||
+        url.lastIndexOf(':') === url.length - 1
+
+    if (myFetch.baseUrl) {
+        if (!url) {
+            url = myFetch.baseUrl
+        } else {
+            url = isSpecialCase
+                ? `${myFetch.baseUrl}${url}`
+                : `${myFetch.baseUrl}/${url}`
+        }
     }
 
     if (options?.params) {
+        console.log(1)
         url = `${url}?${new URLSearchParams(options.params)}`
     }
 
@@ -30,7 +45,7 @@ const myFetch = async (options) => {
     let _options = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         referrerPolice: 'no-referrer',
         customCache: false,
@@ -155,6 +170,18 @@ Object.defineProperties(myFetch, {
     }
 })
 
+myFetch.get = (url, options) => {
+    if (typeof url === 'string') {
+        return myFetch({
+            url,
+            ...options
+        })
+    }
+    return myFetch({
+        ...url
+    })
+}
+
 myFetch.post = (url, body, options) => {
     if (typeof url === 'string') {
         return myFetch({
@@ -200,3 +227,5 @@ myFetch.remove = (url, options) => {
         ...url
     })
 }
+
+export default myFetch;

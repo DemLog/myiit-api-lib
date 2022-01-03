@@ -228,4 +228,4 @@ myFetch.remove = (url, options) => {
     })
 }
 
-export default myFetch;
+exports.myFetch = myFetch;

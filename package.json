@@ -1,12 +1,33 @@
 {
   "name": "myiit-api-lib",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Library for interacting with the myIIT API",
   "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DemLog/myiit-api-lib.git"
+  },
+  "keywords": [
+    "myIIT",
+    "myIIT-API",
+    "client",
+    "myIIT",
+    "myIIT-API-Lib"
+  ],
+  "author": {
+    "name": "DemLoveSky (Dmitry Loginov)",
+    "email": "dem.loginov@gmail.com",
+    "url": "https://demlovesky.ru"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DemLog/myiit-api-lib/issues"
+  },
+  "homepage": "https://github.com/DemLog/myiit-api-lib#readme"
 }

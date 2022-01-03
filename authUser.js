@@ -1,6 +1,6 @@
-import myFetch from "./myFetch/myfetch";
+const myFetch = require('./myFetch/myfetch.js')
 
-export default class User {
+exports.AuthUser = class AuthUser {
 
     constructor(login, password, vkUrl = null) {
         this.login = login
@@ -8,8 +8,8 @@ export default class User {
         this.vkURL = vkUrl
         this.token = null
         this.vkID = null
-
-        myFetch.baseUrl = 'https://myiit.demlovesky.ru/api/v1'
+        this.urlAPI = 'https://myiit.demlovesky.ru/api/v1/'
+        this.timeout = 0
     }
 
     async loginUser(login = this.login, password = this.password) {
@@ -17,22 +17,23 @@ export default class User {
             login,
             password
         }
-        const {data, error} = await myFetch.post('auth.loginUser', body)
+        const {data, error} = await myFetch.post(`${this.urlAPI}auth.loginUser`, body)
 
         if (data) {
             this.token = data.token
             this.vkID = data.vk_id
+            this.timeout = Date.now()
         } else {
             const err = error.errors
             // console.error(err)
-            return [data, err]
+            return {data, err}
         }
         return data
     }
 
     async loginVK(vkURL = this.vkURL) {
         const {data, error} = await myFetch.get(
-            'auth.loginUser',
+            `${this.urlAPI}auth.loginUser`,
             {
                 params: vkURL
             }
@@ -41,10 +42,11 @@ export default class User {
         if (data) {
             this.token = data.token
             this.vkID = data.vk_id
+            this.timeout = Date.now()
         } else {
             const err = error.errors
             // console.error(err)
-            return [data, err]
+            return {data, err}
         }
         return data
     }
@@ -55,15 +57,32 @@ export default class User {
             password,
             vk_id: vkID
         }
-        const {data, error} = await myFetch.post('auth.regUser', body)
+        const {data, error} = await myFetch.post(`${this.urlAPI}auth.regUser`, body)
         if (data) {
             this.token = data.token
             this.vkID = data.vk_id
+            this.timeout = Date.now()
         } else {
             const err = error.errors
             // console.error(err)
-            return [data, err]
+            return {data, err}
         }
         return data
+    }
+
+    async checkTimeOut() {
+        const diffTime = Date.now() - this.timeout
+        console.log(diffTime)
+        if (diffTime >= 3600000) {
+            if (this.vkURL) {
+                const response = await this.loginVK()
+                return !response?.err;
+
+            } else if (this.login && this.password) {
+                const response = await this.loginUser()
+                return !response?.err;
+
+            } else return false
+        } else return true
     }
 }

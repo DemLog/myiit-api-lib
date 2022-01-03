@@ -229,3 +229,7 @@ myFetch.remove = (url, options) => {
 }
 
 exports.myFetch = myFetch;
+exports.myFetch.get = myFetch.get;
+exports.myFetch.post = myFetch.post;
+exports.myFetch.update = myFetch.update;
+exports.myFetch.remove = myFetch.remove;

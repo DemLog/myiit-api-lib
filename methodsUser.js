@@ -1,5 +1,6 @@
 const Auth = require('./authUser.js')
-const myFetch = require('./myFetch/myfetch.js')
+const MyFetch = require('./myFetch/myfetch.js')
+const myFetch = MyFetch.myFetch
 
 exports.User = class User {
     constructor(user) {

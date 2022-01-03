@@ -2,7 +2,7 @@
 
 > NPM - [`myiit-api-lib`](https://www.npmjs.com/package/myiit-api-lib)
 
-### Возможности бибилиотеки основаны на <a href="https://myiit.demlovesky.ru/">myIIT API</a>
+### Возможности библиотеки основаны на <a href="https://myiit.demlovesky.ru/">myIIT API</a>
 
 - Авторизация пользователя в системе
 - Получение уникального токена

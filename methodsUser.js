@@ -39,7 +39,7 @@ exports.User = class User {
             // console.error(err)
             return {data, err}
         }
-        return data
+        return {data}
 
     }
 

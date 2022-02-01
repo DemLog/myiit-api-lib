@@ -29,7 +29,7 @@ exports.AuthUser = class AuthUser {
             // console.error(err)
             return {data, err}
         }
-        return data
+        return {data}
     }
 
     async loginVK(vkURL = this.vkURL) {
@@ -49,7 +49,7 @@ exports.AuthUser = class AuthUser {
             // console.error(err)
             return {data, err}
         }
-        return data
+        return {data}
     }
 
     async regUser(vkID = this.vkID, login = this.login, password = this.password) {
@@ -68,7 +68,7 @@ exports.AuthUser = class AuthUser {
             // console.error(err)
             return {data, err}
         }
-        return data
+        return {data}
     }
 
     async checkTimeOut() {

@@ -33,8 +33,8 @@ const myFetch = async (options) => {
     }
 
     if (options?.params) {
-        console.log(1)
-        url = `${url}?${new URLSearchParams(options.params)}`
+        const params = new URLSearchParams(options.params)
+        url = `${url}?${decodeURIComponent(params)}`
     }
 
     url = window.encodeURI(url)

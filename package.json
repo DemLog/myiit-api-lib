@@ -1,6 +1,6 @@
 {
   "name": "myiit-api-lib",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Library for interacting with the myIIT API",
   "main": "index.js",
   "directories": {

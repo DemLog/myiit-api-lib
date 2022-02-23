@@ -1,5 +1,6 @@
 const Auth = require('./authUser.js')
-const myFetch = require('./myFetch/myfetch.js')
+const MyFetch = require('./myFetch/myfetch.js')
+const myFetch = MyFetch.myFetch
 
 exports.User = class User {
     constructor(user) {
@@ -38,7 +39,7 @@ exports.User = class User {
             // console.error(err)
             return {data, err}
         }
-        return data
+        return {data}
 
     }
 

@@ -33,8 +33,8 @@ const myFetch = async (options) => {
     }
 
     if (options?.params) {
-        console.log(1)
-        url = `${url}?${new URLSearchParams(options.params)}`
+        const params = new URLSearchParams(options.params)
+        url = `${url}?${decodeURIComponent(params)}`
     }
 
     url = window.encodeURI(url)
@@ -121,7 +121,7 @@ const myFetch = async (options) => {
         let result
 
         if (response.ok) {
-            result = { data, error: null, info }
+            result = { data: data, error: null, info }
 
             if (_options.method === 'GET') {
                 myFetchCache.set(url, result)
@@ -229,3 +229,7 @@ myFetch.remove = (url, options) => {
 }
 
 exports.myFetch = myFetch;
+exports.myFetch.get = myFetch.get;
+exports.myFetch.post = myFetch.post;
+exports.myFetch.update = myFetch.update;
+exports.myFetch.remove = myFetch.remove;
